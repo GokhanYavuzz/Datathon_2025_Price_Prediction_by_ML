@@ -1,49 +1,42 @@
-# 🛒 Price Prediction by ML | YZTA Datathon 2025
+# 🧠 Price Prediction by ML (YZTA Datathon 2025)
 
-This project was developed as part of the **YZTA (Yapay Zeka ve Teknoloji Akademisi) Datathon 2025**, where the goal was to predict the **sales price of retail products** based on various features such as category, market, date, and nutritional value using Machine Learning.
-
----
-
-## 📌 Objective
-
-To build a machine learning model that accurately predicts the price of a product using historical data and categorical features.
-
----
+This project was developed as part of the YZTA Datathon 2025 competition. The task was to predict product prices based on various features such as nutritional value, category, market, and more.
 
 ## 📁 Dataset Description
 
-The dataset consists of three CSV files:
+The dataset includes:
+- `train.csv`: Labeled data with product prices
+- `testFeatures.csv`: Unlabeled test data to predict
+- `sample_submission.csv`: Format example for predictions
 
-- `train.csv`: Contains historical product sales including actual prices.
-- `testFeatures.csv`: Contains unseen product data (without prices) to predict.
-- `sample_submission.csv`: Format for Kaggle submission.
-
-### 🧾 Features:
-
-- `tarih`: Date the product was recorded
-- `ürün`: Product name
-- `ürün besin değeri`: Nutritional value (numeric)
-- `ürün kategorisi`: Product category (e.g. meat, vegetables)
-- `ürün üretim yeri`: Production location
-- `market`: Market name
-- `şehir`: City of sale
-- `ürün fiyatı`: (only in training set) — target variable to predict
+### Features:
+- `tarih` (date)
+- `ürün` (product name)
+- `ürün besin değeri` (nutritional value)
+- `ürün kategorisi` (category)
+- `ürün fiyatı` (price – target)
+- `ürün üretim yeri`, `market`, `şehir` (location attributes)
 
 ---
 
-## 🧠 Model Used
+## 🛠 Models Used
 
-- **Linear Regression** (`sklearn.linear_model`)
-  - Simple, interpretable baseline model
-  - Categorical features were label encoded
-  - Date features (year, month, day) were extracted from `tarih`
+### 1. 🔹 Linear Regression (Baseline)
+- Trained a simple linear model
+- Achieved basic accuracy with minimal feature engineering
+- Good for interpretability, but limited on complex patterns
+
+### 2. 🔸 Random Forest Regressor (Improved)
+- Trained with `sklearn.ensemble.RandomForestRegressor`
+- Handled non-linear relationships and categorical data better
+- Significantly improved prediction performance (lower RMSE)
 
 ---
 
-## 🧪 How to Run
+## 📊 Preprocessing Steps
 
-1. Clone this repo or upload files to a Kaggle notebook or Colab
-2. Ensure the data files are in the correct working directory
-3. Run the notebook/script:
-   ```bash
-   python model.py  # or run all cells in notebook
+1. Converted `tarih` to datetime, extracted `year`, `month`, `day`
+2. Applied `LabelEncoder` to categorical features:
+   - `ürün`, `ürün kategorisi`, `ürün üretim yeri`, `market`, `şehir`
+3. Dropped unused columns (`tarih`, `id`)
+4. Used the following features for training:
